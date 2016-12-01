@@ -5,7 +5,9 @@
         </div>
     </div>
 </template>
-<script>
+<script>    
+    import file from '../../assets/file.png'
+
     export default {
         props: ['icon', 'wrapColor', 'iconColor'],
         data() {
@@ -18,8 +20,8 @@
         computed: {
             iconStyle: function() {
                 return {
-                    background: `url(${this.icon}) 0 0 /cover no-repeat`,
-                    filter: `drop-shadow(30px 0 0 ${this.iconColor})`
+                    background: `url(${this.icon || file}) 0 0 /cover no-repeat`,
+                    filter: `drop-shadow(30px 0 0 ${this.iconColor || '#fff'})`
                 }
             }
         }

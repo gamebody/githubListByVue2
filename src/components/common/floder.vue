@@ -1,15 +1,19 @@
 <template>
-    <div class="floder">
+    <div class="floder" :style="initStyle">
         <div class="floder-header">
-            <h3>新文件夹</h3>
-            <button type="button" class="btn-cancel">取消</button>
-            <button type="button" class="btn-finish">完成</button>
+            <h3>{{ this.editing ? '修改文件夹' : '新文件夹' }}</h3>
+            <button type="button" class="btn-cancel" @click.stop="cancel">取消</button>
+            <button type="button" class="btn-finish" @click.stop="finish">完成</button>
         </div>
 
         <div class="floder-input">
-            <icon class="custom" :icon="currentIcon.icon" wrap-color="#315162" :icon-color="currentIcon.iconColor">
+            <icon 
+                class="custom" 
+                :icon="currentIcon.icon" 
+                wrap-color="#315162" 
+                :icon-color="currentIcon.iconColor">
             </icon>
-            <input type="text" name="" value="hah">
+            <input type="text" v-model="currentValue">
         </div>
 
 
@@ -87,6 +91,7 @@
         {icon: file, iconColor: '#996545'},
         {icon: file, iconColor: '#66aacc'},        
     ]
+    let index = 1;
     export default {
         props:['editing'],
         data() {
@@ -95,13 +100,18 @@
                     icon: file,
                     iconColor: '#fff'
                 },
+                currentValue:'',
                 deleteIcon: del,
                 infro: '隐藏', 
                 isActive: true,   
                 showIcons: true,
                 iconPanelToggle: true,
                 kindIcons: kindIcons,
-                fileIcons: fileIcons
+                fileIcons: fileIcons,
+                initStyle: {
+                    left: '',
+                    top: ''
+                }
             }
         },
         methods: {
@@ -129,18 +139,49 @@
                 } else {
                     this.infro = '显示'
                 }
+            },
+            posInit: function() {
+                const clientWidth = document.body.clientWidth;
+                const posLeft = (clientWidth / 2) - 150;
+                return {
+                    left: posLeft + 'px',
+                    top: '10%'
+                }
+            },
+            cancel: function() {
+                alert('cancel')
+            },
+            finish: function() {
+                const icon = {
+                    name: 'floder' + index++,
+                    icon: this.currentIcon.icon,
+                    iconColor: this.currentIcon.iconColor,
+                    wrapColor: '#294453'
+                }
+                const text = this.currentValue
+                this.$store.commit('addFloder', {
+                    icon,
+                    text
+                })
+                this.currentValue = ''
             }
         },
         components: {
             icon: require('./icon')
+        },
+        created: function() {
+            const pos = this.posInit()
+            this.initStyle = pos
         }
     }
 </script>
 <style scoped>
     .floder {
+        position: absolute;
         width: 300px;
         border-radius: 8px;
         background: #3a5f73;
+        z-index: 9999;
     }
     
     .floder-header {

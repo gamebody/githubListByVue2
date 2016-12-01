@@ -1,12 +1,17 @@
 <template>
     <router-link :to="where" tag="li" class="clearf wrap">
         <div class="nav-container">
-            <div class="nav-icon">
-                <span></span>
+            <div class="nav-pos">
+                <icon
+                    :icon="icon"
+                    :icon-color="iconColor"
+                    :wrap-color="wrapColor"
+                    ></icon>
             </div>
+
             <div class="nav">
                 <nav>
-                    主页
+                    {{text}}
                 </nav>
             </div>
         </div>
@@ -14,11 +19,14 @@
 </template>
 <script>
     export default {
-        props:['where'],
+        props:['where', 'icon', 'iconColor', 'wrapColor', 'text'],
         data() {
             return {
                 
             }
+        },
+        components: {
+            icon: require('../common/icon')
         }
     }
 </script>
@@ -37,16 +45,11 @@
     .wrap:hover {
         background: #2d4a59;
     }
-    .nav-icon {
+    .nav-pos {
         position: relative;
-        top: 12px;
         float: left;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        background: #294453;
+        top: 12px;
     }
-    
     .nav-icon span {
         position: absolute;
         display: block;

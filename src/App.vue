@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <floder></floder>
         <nav-control></nav-control>
         <main-content></main-content>
     </div>
@@ -10,7 +11,8 @@
         name: 'app',
         components: {
             navControl: require('./components/navControl'),
-            mainContent: require('./components/mainContent')
+            mainContent: require('./components/mainContent'),
+            floder: require('./components/common/floder')
         }
     }
 </script>
@@ -19,6 +21,7 @@
     html,
     body,
     #app {
+        width: 100%;
         height: 100%;
     }
     
