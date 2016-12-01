@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>test1</h1>
-        <floder></floder>
+        <floder :editing="true"></floder>
     </div>
 </template>
 <script>

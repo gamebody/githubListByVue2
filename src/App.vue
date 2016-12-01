@@ -34,23 +34,5 @@
         display: table;
         clear: both;
     }
-    
-    .icon-wrap {
-        position: relative;
-        top: 12px;
-        float: left;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        background: #294453;
-    }
-    
-    .icon {
-        display: block;
-        width: 25px;
-        height: 25px;
-        margin: 5px 0 0 5px;
-        cursor: pointer;
-        background-size: cover;
-    }
+
 </style>
