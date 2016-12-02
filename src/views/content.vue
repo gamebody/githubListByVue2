@@ -1,6 +1,7 @@
 <template>
     <div>
         <add-list></add-list>
+        <list></list>
     </div>
 </template>
 <script>
@@ -11,7 +12,8 @@
             }
         },
         components: {
-            addList: require('../components/common/addList')
+            addList: require('../components/common/addList'),
+            list: require('../components/list')
         }
     }
 </script>
