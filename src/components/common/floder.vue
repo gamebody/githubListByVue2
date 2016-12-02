@@ -1,5 +1,5 @@
 <template>
-    <div class="floder" :style="initStyle">
+    <div class="floder" :style="initStyle" v-show="showFloder">
         <div class="floder-header">
             <h3>{{ this.editing ? '修改文件夹' : '新文件夹' }}</h3>
             <button type="button" class="btn-cancel" @click.stop="cancel">取消</button>
@@ -93,7 +93,7 @@
     ]
     let index = 1;
     export default {
-        props:['editing'],
+        props:['editing', 'show'],
         data() {
             return {
                 currentIcon: {
@@ -112,6 +112,11 @@
                     left: '',
                     top: ''
                 }
+            }
+        },
+        computed: {
+            showFloder: function() {
+                return this.show
             }
         },
         methods: {
@@ -149,9 +154,18 @@
                 }
             },
             cancel: function() {
-                alert('cancel')
+                this.currentValue = ''
+                this.$store.commit('toggleFloder')
             },
             finish: function() {
+                if(this.currentValue === '') {
+                    this.currentValue = '⊙﹏⊙b汗'
+                    const timer = setTimeout(() => {
+                        this.currentValue = ''
+                        clearTimeout(timer)
+                    },500)
+                    return
+                }
                 const icon = {
                     name: 'floder' + index++,
                     icon: this.currentIcon.icon,
@@ -164,6 +178,7 @@
                     text
                 })
                 this.currentValue = ''
+                this.$store.commit('toggleFloder')
             }
         },
         components: {

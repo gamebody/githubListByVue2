@@ -23,6 +23,9 @@ export default new Vuex.Store({
     mutations: {
         addFloder({ floders }, floder) {
             floders.push(floder)
+        },
+        toggleFloder({ floder }) {
+            floder.isRunning = !floder.isRunning
         }
     },
     getters: {

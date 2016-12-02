@@ -1,6 +1,6 @@
 <template>
     <div class="control-bar">
-        <div class="add">
+        <div class="add" @click.stop="showFloder">
             <span class="add-icon"></span>
         </div>
         <div class="title">
@@ -13,11 +13,16 @@
     export default {
         data() {
             return {
-                showFloder: false
+                
             }
         },
         components: {
             more: require('./more')
+        },
+        methods: {
+            showFloder: function() {
+                this.$store.commit('toggleFloder')
+            }
         }
     }
 </script>
