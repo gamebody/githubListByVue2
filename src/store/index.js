@@ -2,23 +2,33 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 Vue.use(Vuex)
 
+const item = {
+    icon: {
+        name: 'start',
+        icon: null,
+        wrapColor: '#fff',
+        iconColor: '#fff'
+    },
+    text: '文件夹名字',
+    list: [
+        {
+            name: 'vue',
+            carts: [
+                {
+
+                }
+            ]
+        }
+    ]
+}
+
 export default new Vuex.Store({
     state: {
         floder: {
             isRunning: false,
             editing: false
         },
-        floders:[
-            // {
-            //     icon: {
-            //         name: '111',
-            //         icon: react,
-            //         wrapColor: '#294453',
-            //         iconColor: '#ccc'
-            //     },
-            //     text: 'Hello'
-            // }
-        ]
+        floders:[]
     },
     mutations: {
         addFloder({ floders }, floder) {

@@ -132,7 +132,6 @@
                     this.isActive = false
                     this.iconPanelToggle = false
                 } else {
-                    console.log('1')
                     this.isActive = true
                     this.iconPanelToggle = true
                 }    

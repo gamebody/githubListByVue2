@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-control">
+    <div class="nav-control clearf">
         <nav-control-container></nav-control-container>
     </div>
 </template>
