@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import api from '../api'
 Vue.use(Vuex)
 
 const item = {
@@ -28,6 +29,9 @@ export default new Vuex.Store({
             isRunning: false,
             editing: false
         },
+        currentSearch: [
+
+        ],
         floders:[]
     },
     mutations: {
@@ -36,12 +40,19 @@ export default new Vuex.Store({
         },
         toggleFloder({ floder }) {
             floder.isRunning = !floder.isRunning
+        },
+        showSearchValue(state, data) {
+           state.currentSearch =  data       
         }
     },
     getters: {
         
     },
     actions: {
-
+        searchRepo({ commit }, params) {
+            return api.getRepos(params).then(({ items }) => {
+                commit('showSearchValue', items)
+            })
+        }
     }
 })

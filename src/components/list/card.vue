@@ -1,17 +1,17 @@
 <template>
-    <div class="card clearf">
+    <div class="card clearf" v-if="!!repoInfo">
         <div class="card-avator">
-            <img src="../../assets/user.png" alt="user">
+            <img :src="repoInfo.owner.avatar_url" alt="user">
         </div>
         <div class="card-content">
-            <h6>facebook/react</h6>
-            <p>A framework for building native app</p>
+            <h6>{{ repoInfo.full_name }}</h6>
+            <p>{{ repoInfo.description }}</p>
             <div class="card-content-footer">
                 <ul class="clearf">
-                    <li>40559</li>
-                    <li>40559</li>
-                    <li>9178</li>
-                    <li>148MB</li>
+                    <li>{{ repoInfo.stargazers_count }}</li>
+                    <li>{{ repoInfo.watchers_count }}</li>
+                    <li>{{ repoInfo.forks_count }}</li>
+                    <li>{{ size }}</li>
                 </ul>
             </div>
         </div>
@@ -22,9 +22,20 @@
 </template>
 <script>
     export default {
+        props:['repoInfo'],
         data() {
             return {
 
+            }
+        },
+        computed: {
+            size: function() {
+                const size = this.repoInfo.size
+                if(size < 1000) {
+                    return size + 'KB'
+                } else {
+                   return Math.ceil(size / 1000) + 'MB'
+                }
             }
         }
     }
@@ -70,11 +81,23 @@
         color: #f3f3f3;
     }
     .card-content-footer li {
-        float: right;
+        float: left;
         text-indent: 16px;
         width: 44px;
-        color: #335466;
+        color: #f3f3f3;
         font-size: 7px;
+    }
+    .card-content-footer li:first-child {
+        background: url('../../assets/star.png') 1px 2px no-repeat;
+    }
+    .card-content-footer li:nth-child(2) {
+        background: url('../../assets/watch.png') 1px 2px no-repeat;        
+    }
+    .card-content-footer li:nth-child(3) {
+        background: url('../../assets/fork.png') 1px 2px no-repeat;        
+    }
+    .card-content-footer li:nth-child(4) {
+        background: url('../../assets/zip.png') 1px 2px no-repeat;        
     }
     .card-type {
         position: absolute;

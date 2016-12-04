@@ -26,29 +26,25 @@
             <input 
                 type="text" 
                 placeholder="请输入..." 
-                v-model="currentValue">
+                v-model="currentValue"
+                @keyup.enter="searchRepo">
             <div 
                 class="list-search-cancel"
                 @click.prevent.stop="toggleHandle"></div>
         </div>
 
-        <div class="list-search-result">
+        <div class="list-search-result" v-show="currentValue !== ''">
             <ul>
-                <li class="list-search-result-item">
-                    <card></card>
-                </li>
-                <li class="list-search-result-item">
-                    <card></card>
-                </li>
-                <li class="list-search-result-item">
-                    <card></card>
-                </li>
+                <li class="list-search-result-item"
+                    v-for="item in currentSearchValue">
+                    <card :repoInfo="item"></card>
+                </li>              
             </ul>
 
-            <div class="pre-bar">
+            <div class="pre-bar" @click.stop.prevent="pre" v-show="currentPage !== 1">
                 &lt;
             </div>
-            <div class="next-bar">
+            <div class="next-bar" @click.stop.prevent="next">
                 &gt;
             </div>            
         </div>
@@ -61,13 +57,34 @@
                 toggle: false,
                 currentValue: '',
                 currentPage: 1,
-
+                per_page: 3
+            }
+        },
+        computed: {
+            currentSearchValue: function() {          
+                return this.$store.state.currentSearch
             }
         },
         methods: {
             toggleHandle: function() {
                 this.currentValue = ''
                 this.toggle = !this.toggle
+            },
+            searchRepo: function() {
+                const params = {
+                    keyWords: this.currentValue,
+                    currentPage: this.currentPage,
+                    per_page: this.per_page
+                }
+                this.$store.dispatch('searchRepo', params)
+            },
+            pre: function() {
+                this.currentPage -= 1
+                this.searchRepo()
+            },
+            next: function() {
+                this.currentPage += 1
+                this.searchRepo()
             }
         },
         components: {
