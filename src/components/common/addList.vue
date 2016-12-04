@@ -11,7 +11,9 @@
                 <input class="default-input" type="text" placeholder="Add a list..." v-model="currentValue">
             </div>
             <div class="addList-control clearf">
-                <button class="addList-save">Save</button>
+                <button 
+                    class="addList-save"
+                    @click.prevent="addListHandle">Save</button>
                 <button 
                     class="addList-cancel"
                     @click.prevent.stop="toggle"
@@ -31,6 +33,19 @@
         methods: {
             toggle: function() {
                 this.isEditing = !this.isEditing
+            },
+            addListHandle: function() {
+                if(this.currentValue === '') {
+                    return 
+                }
+                const list = {
+                    name: this.currentValue,
+                    cards: [],
+                    path: this.$route.path
+                }
+                this.$store.commit('addList', list)
+                this.cuurenValue = ''
+                this.isEditing = false
             }
         }
     }

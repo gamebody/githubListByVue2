@@ -1,7 +1,7 @@
 <template>
     <div class="list">
         <div class="list-title">
-            <h5>react</h5>
+            <h5>{{ item.name }}</h5>
         </div>
 
         <div class="list-selected">
@@ -52,6 +52,7 @@
 </template>
 <script>
     export default {
+        props:['item'],
         data() {
             return {
                 toggle: false,

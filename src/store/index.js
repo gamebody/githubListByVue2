@@ -36,6 +36,7 @@ export default new Vuex.Store({
     },
     mutations: {
         addFloder({ floders }, floder) {
+            floder.list = []
             floders.push(floder)
         },
         toggleFloder({ floder }) {
@@ -43,6 +44,11 @@ export default new Vuex.Store({
         },
         showSearchValue(state, data) {
            state.currentSearch =  data       
+        },
+        addList(state, list) {
+            state.floders.filter((floder) => (
+                `/${floder.icon.name}` === list.path
+            ))[0].list.push(list)
         }
     },
     getters: {

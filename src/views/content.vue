@@ -1,7 +1,9 @@
 <template>
     <div>
         <add-list></add-list>
-        <list></list>
+        <list
+            v-for="item in list"
+            :item="item"></list>
     </div>
 </template>
 <script>
@@ -9,6 +11,14 @@
         data() {
             return {
                 
+            }
+        },
+        computed: {
+            list: function() {
+                const path = this.$route.path
+                return this.$store.state.floders.filter(({ icon }) => (
+                    path === `/${icon.name}`
+                ))[0].list
             }
         },
         components: {

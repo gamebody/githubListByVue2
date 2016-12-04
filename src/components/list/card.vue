@@ -4,7 +4,7 @@
             <img :src="repoInfo.owner.avatar_url" alt="user">
         </div>
         <div class="card-content">
-            <h6>{{ repoInfo.full_name }}</h6>
+            <h6>{{ repoInfo.name }}</h6>
             <p>{{ repoInfo.description }}</p>
             <div class="card-content-footer">
                 <ul class="clearf">
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="card-type">
-            <p>javascript</p>
+            <p>{{ repoInfo.language }}</p>
         </div>
     </div>
 </template>
