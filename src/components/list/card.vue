@@ -37,6 +37,9 @@
                    return Math.ceil(size / 1000) + 'MB'
                 }
             }
+        },
+        methods: {
+            
         }
     }
 </script>

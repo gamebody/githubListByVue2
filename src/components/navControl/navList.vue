@@ -31,7 +31,5 @@
         height: 500px;
         overflow: auto;
     }
-    ::-webkit-scrollbar {
-        width: 0px;
-    }
+    
 </style>

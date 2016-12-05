@@ -53,8 +53,6 @@
 <style scoped>
     .addList-container {
         position: relative;
-        left: 20px;
-        top: 40px;
         width: 270px;
         border-radius: 5px;
         background: #335466;

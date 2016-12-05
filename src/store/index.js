@@ -49,6 +49,13 @@ export default new Vuex.Store({
             state.floders.filter((floder) => (
                 `/${floder.icon.name}` === list.path
             ))[0].list.push(list)
+        },
+        addCard(state, { searchItem, item }) {
+            state.floders.filter((floder) => (
+                `/${floder.icon.name}` === item.path
+            ))[0].list.filter((listItem) => (
+                item.name === listItem.name
+            ))[0].cards.push(searchItem)
         }
     },
     getters: {

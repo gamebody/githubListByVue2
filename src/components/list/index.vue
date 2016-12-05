@@ -6,14 +6,10 @@
 
         <div class="list-selected">
             <ul>
-                <li class="list-search-result-item">
-                    <card></card>
-                </li>
-                <li class="list-search-result-item">
-                    <card></card>
-                </li>
-                <li class="list-search-result-item">
-                    <card></card>
+                <li
+                    class="list-search-result-item"
+                    v-for="card in cards">
+                    <card :repoInfo="card"></card>
                 </li>
             </ul>
         </div>
@@ -36,8 +32,9 @@
         <div class="list-search-result" v-show="currentValue !== ''">
             <ul>
                 <li class="list-search-result-item"
-                    v-for="item in currentSearchValue">
-                    <card :repoInfo="item"></card>
+                    v-for="searchItem in currentSearchValue"
+                    @click="addCardHandle(searchItem, item)">
+                    <card :repoInfo="searchItem"></card>
                 </li>              
             </ul>
 
@@ -64,6 +61,15 @@
         computed: {
             currentSearchValue: function() {          
                 return this.$store.state.currentSearch
+            },
+            cards: function() {
+                const cards = this.$store.state.floders.filter((floder) => (
+                `/${floder.icon.name}` === this.item.path
+                ))[0].list.filter((listItem) => (
+                this.item.name === listItem.name
+                ))[0].cards
+
+                return cards
             }
         },
         methods: {
@@ -86,6 +92,12 @@
             next: function() {
                 this.currentPage += 1
                 this.searchRepo()
+            },
+            addCardHandle: function(searchItem, item) {
+                this.$store.commit('addCard', {
+                    searchItem,
+                    item
+                })
             }
         },
         components: {
@@ -95,7 +107,6 @@
 </script>
 <style>
     .list {
-        margin-left: 350px;
         width: 270px;
         background: #335466;
         border-radius: 4px;
@@ -164,6 +175,7 @@
     }
     .list-search-result-item {
         padding: 0 9px 6px 9px;
+        cursor: pointer;
     }
     .pre-bar,
     .next-bar {

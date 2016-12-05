@@ -3,7 +3,7 @@
         <header class="main-header">
             <h4>{{ title }}</h4>
         </header>
-        <router-view></router-view>
+        <router-view></router-view>    
     </div>
 </template>
 
@@ -31,6 +31,7 @@
 
 <style scoped>
     #main {
+        position: relative;
         overflow: hidden;
         height: 100%;
         background: #406a80;
