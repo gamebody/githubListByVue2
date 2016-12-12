@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+![repoSearch](https://github.com/gamebody/githubListByVue2/raw/master/repoSearch.png)
+
 ## Build Setup
 
 ``` bash
